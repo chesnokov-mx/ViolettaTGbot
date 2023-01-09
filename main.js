@@ -4,9 +4,6 @@ const { Keyboard, Key } = require('telegram-keyboard')
 const { cnt } = require("./content.js")
 const fs  = require("fs")
 
-
-
-
 require('dotenv').config();
 
 function getResponses(){
@@ -64,6 +61,7 @@ function MyScene(name, content, scr =''){
         }catch (e){}
     }
     this.reply = async (ctx) => {
+        // console.log(ctx)
         const Username = ctx?.message?.from?.first_name || ctx.update.callback_query.from.first_name;
         deleteDoublerPrev(ctx)
         if (scr) {
@@ -87,7 +85,7 @@ Intro.addButton("Подать заявку", "PostForm")
 
 const GenInfo = new MyScene("GenInfo", cnt.GenInfo)
 GenInfo.addButton("об Основателе и ее личной работе", "AboutFounder")
-GenInfo.addButton('Об Alex и создании бренда под ключ', 'AboutAlex')
+GenInfo.addButton('О брендинговом агенстве', 'AboutAlex')
 GenInfo.addButton("Кейсы", "Cases")
 GenInfo.addUrl("Youtube канал", "https://www.youtube.com/channel/UCV-0hoNf08XkqoZQeKO_pMQ")
 GenInfo.addButton("Назад", "Intro")
@@ -101,11 +99,17 @@ PostFrom.addUrl("Да!", "https://www.google.com")
 PostFrom.addButton("Назад", "Intro")
 
 const Cases = new MyScene("Cases", cnt.Cases)
-Cases.addButton('Кейс #1 (в разработке)', 'Case1')
+Cases.addButton('Кейс #1', 'Case1')
 Cases.addButton('Кейс #2', 'Case2')
 Cases.addButton('Кейс #3 (в разработке)', 'Case3')
 Cases.addButton('Кейс #4', 'Case4')
 Cases.addButton("Назад", "GenInfo")
+
+
+const Case1 = new MyScene('Case1', cnt.case1)
+Case1.addUrl("Подать заявку", "https://www.google.com")
+Case1.addButton("Назад", "Cases")
+
 
 const Case2 = new MyScene('Case2', cnt.case2, "./images/case2.jpg")
 Case2.addUrl("Хочу создать новую нишу как Lindi", "https://www.google.com")
@@ -116,15 +120,15 @@ Case4.addUrl("Подать заявку", "https://www.google.com")
 Case4.addButton("Назад", "Cases")
 
 const AboutFounder = new MyScene("AboutFounder", cnt.AboutFounder)
-AboutFounder.addButton("Мой youtube-канал", "https://www.youtube.com/channel/UCV-0hoNf08XkqoZQeKO_pMQ")
-AboutFounder.addUrl("Мой путь", "https://www.google.com")
-AboutFounder.addUrl("КАК ПОВЫСИТЬ СРЕДНИЙ ЧЕК", "https://www.google.com")
-AboutFounder.addUrl("КАК ЭКСПЕРТУ ПРОДАВАТЬ В ОНАЛАЙНЕ", "https://www.google.com")
-AboutFounder.addUrl("Личная Консультация", "https://www.google.com")
-AboutFounder.addUrl("Программа путь Капитана. ", "https://www.google.com")
+AboutFounder.addUrl("Мой youtube-канал", "https://www.youtube.com/channel/UCV-0hoNf08XkqoZQeKO_pMQ")
+AboutFounder.addUrl("Мой путь", "https://www.instagram.com/stories/highlights/17959538558245376/")
+AboutFounder.addUrl("КАК ПОВЫСИТЬ СРЕДНИЙ ЧЕК", "https://forms.gle/LCbzVDjDKBQo57MX6")
+// AboutFounder.addUrl("КАК ЭКСПЕРТУ ПРОДАВАТЬ В ОНЛАЙНЕ", "https://www.google.com")
+AboutFounder.addUrl("Личная Консультация", "https://forms.gle/kDp4zdsYCTQdG16s5")
+AboutFounder.addUrl("Программа путь Капитана", "https://www.google.com")
 AboutFounder.addButton("Назад", "GenInfo")
 
-const AboutAlex = new MyScene("AboutAlex", cnt.AboutAlex)
+const AboutAlex = new MyScene("AboutAlex", cnt.AboutAlex, "./images/brand.jpg")
 AboutAlex.addButton("Наше видение", "OurVision")
 AboutAlex.addButton('Наша миссия','OurMission')
 AboutAlex.addButton('Услуги','OurService')
@@ -138,9 +142,10 @@ const OurMission = new MyScene("OurMission", cnt.OurMission)
 OurMission.addButton("Назад", "AboutAlex")
 
 const OurService = new MyScene('OurService', cnt.OurService)
+OurService.addUrl("Подать заявку", "https://www.google.com")
 OurService.addButton("Назад",'AboutAlex')
 
-const OurPrices = new MyScene("OurPrices", cnt.OurPrices)
+const OurPrices = new MyScene("OurPrices", cnt.OurPrices, "./images/prices.jpeg")
 OurPrices.addButton("Назад", "AboutAlex")
 
 
@@ -158,9 +163,7 @@ const questions = [
     {
         question: 'Напишите, пожалуйста вашу сферу деятельности'
     },
-    {
-        question: "Напишите, пожалуста, вашу нишу"
-    },
+
     {
         question: "Напишите, пожалуйста, ваш доход"
     },
@@ -180,25 +183,25 @@ const questions = [
         ]
     },
     {
-        question: "Хотите ли вы связаться для дальнейшей консультации?",
+        question: "Вы бы хотели связаться с нами для дальнейшей консультации ?",
         options: [
             ["Да","consultingYes"],
             ["Нет","consultingNo"]
         ]
     },
     {
-        question: "Напишите, пожалуйста, удобный для вас способ связи",
+        question: "Напишите, пожалуйста, удобный для вас способ связи и данные для связи",
     },
     {
-        question: "Ваши данные были успешно сохранены, в ближайшее время мы с вами свяжемся, \nнажмите на кнопку ниже, " +
-            "чтобы вернуться на главное меню бота",
+        question: "Благодарим за ваш интерес 🙏🏻☺️\n\nВаши данные были успешно сохранены, в ближайшее время мы с вами свяжемся. \n\nНажмите на кнопку ниже, " +
+            "чтобы вернуться в главное меню бота",
         options: [
             ["В меню", 'Intro']
         ]
     },
     {
-        question: "Спасибо за прохождение анкеты, надеемся она помогла найти вам необходимую вам услугу, Нажмите кнопку ниже" +
-            "чтобы вернуться в главное меню бота.",
+        question: "Спасибо за прохождение анкеты, надеемся она вам помогла сориентироваться в наших продуктах. \n\n" +
+            "Нажмите кнопку ниже, чтобы вернуться в главное меню бота.",
         options: [
             ["В меню", 'Intro']
         ]
@@ -254,7 +257,7 @@ bot.action(regexB, (ctx)=>{
 
 const regex = /pb[1-9]|pb10/
 bot.action(regex, (ctx)=>{
-    const string = 'Вам подойдет следующая услуга\n\n'
+    const string = 'Вам подойдет следующая услуга:\n\n'
     let responses = getResponses()
 
     try {
@@ -266,7 +269,7 @@ bot.action(regex, (ctx)=>{
     let cq = questions[responses[ctx.from.id]['currentQuestion']]
     const answer = string + cnt[ctx.update.callback_query.data] + "\n\n" + cq.question;
     responses[ctx.chat.id][currentQ] = ctx.update.callback_query.data
-    ctx.reply(answer, cq.options === undefined? undefined : BTNfromArray(cq.options))
+    ctx.replyWithHTML(answer, cq.options === undefined? undefined : BTNfromArray(cq.options))
     responses[ctx.from.id]['currentQuestion']++
     setResponses(responses)
 })
