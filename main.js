@@ -95,28 +95,32 @@ Quest.addButton("Начать опрос", "Quest1")
 Quest.addButton("Назад", "Intro")
 
 const PostFrom = new MyScene("PostForm", cnt.PostForm)
-PostFrom.addUrl("Да!", "https://www.google.com")
+PostFrom.addUrl("Да!", "https://forms.gle/uB6gvTeaFU5am2WXA")
 PostFrom.addButton("Назад", "Intro")
 
 const Cases = new MyScene("Cases", cnt.Cases)
 Cases.addButton('Кейс #1', 'Case1')
 Cases.addButton('Кейс #2', 'Case2')
-Cases.addButton('Кейс #3 (в разработке)', 'Case3')
+Cases.addButton('Кейс #3', 'Case3')
 Cases.addButton('Кейс #4', 'Case4')
 Cases.addButton("Назад", "GenInfo")
 
 
 const Case1 = new MyScene('Case1', cnt.case1)
-Case1.addUrl("Подать заявку", "https://www.google.com")
+Case1.addUrl("Подать заявку", "https://forms.gle/uB6gvTeaFU5am2WXA")
 Case1.addButton("Назад", "Cases")
 
 
 const Case2 = new MyScene('Case2', cnt.case2, "./images/case2.jpg")
-Case2.addUrl("Хочу создать новую нишу как Lindi", "https://www.google.com")
+Case2.addUrl("Хочу создать новую нишу как Lindi", "https://forms.gle/uB6gvTeaFU5am2WXA")
 Case2.addButton("Назад", "Cases")
 
+const Case3 = new MyScene('Case3', cnt.case3)
+// Case3.addUrl("Хочу создать новую нишу как Lindi", "https://www.google.com")
+Case3.addButton("Назад", "Cases")
+
 const Case4 = new MyScene("Case4", cnt.case4, "./images/case4.jpg")
-Case4.addUrl("Подать заявку", "https://www.google.com")
+Case4.addUrl("Подать заявку", "https://forms.gle/uB6gvTeaFU5am2WXA")
 Case4.addButton("Назад", "Cases")
 
 const AboutFounder = new MyScene("AboutFounder", cnt.AboutFounder)
@@ -142,10 +146,11 @@ const OurMission = new MyScene("OurMission", cnt.OurMission)
 OurMission.addButton("Назад", "AboutAlex")
 
 const OurService = new MyScene('OurService', cnt.OurService)
-OurService.addUrl("Подать заявку", "https://www.google.com")
+OurService.addUrl("Подать заявку", "https://forms.gle/uB6gvTeaFU5am2WXA")
 OurService.addButton("Назад",'AboutAlex')
 
 const OurPrices = new MyScene("OurPrices", cnt.OurPrices, "./images/prices.jpeg")
+OurPrices.addUrl("Подать заявку", "https://forms.gle/uB6gvTeaFU5am2WXA")
 OurPrices.addButton("Назад", "AboutAlex")
 
 
@@ -163,7 +168,6 @@ const questions = [
     {
         question: 'Напишите, пожалуйста вашу сферу деятельности'
     },
-
     {
         question: "Напишите, пожалуйста, ваш доход"
     },
